@@ -1,3 +1,5 @@
+package PhoneContacts;
+
 import java.util.Scanner;
 
 public class PhoneContacts {
