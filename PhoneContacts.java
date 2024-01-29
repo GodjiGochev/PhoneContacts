@@ -2,37 +2,58 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class phoneContacts {
+public class PhoneContacts {
     public static void main(String[] args) {
-        //Scanner so I can log in my new numbers
+
         Scanner scanner = new Scanner(System.in);
         //My starting title
         System.out.println("Contacts");
-        //Title to enter the number
-        System.out.print("Enter number: ");
-        int inputPhoneNumber = Integer.parseInt(scanner.nextLine());
-        //Title to enter a name
-        System.out.print("Enter name: ");
-        String input = scanner.nextLine();
+        //Title to enter option
+        System.out.print("Enter option: ");
         //LinkedHashMap where I will keep my phone numbers
-        LinkedHashMap<String, Integer> phoneNumberStored = new LinkedHashMap<>();
+        LinkedHashMap<String, String> phoneNumberStored = new LinkedHashMap<>();
         //New input for the loop
         String command = scanner.nextLine();
         //While loop for the command (input)
-        while (!command.equals("call")) {
+        while (!command.equals("exit")) {
             switch (command) {
+                //Command for the adding numbers option
                 case "Add":
-                    phoneNumberStored.put(input, inputPhoneNumber);
+                    //Title to enter name and number
+                    System.out.print("Enter name: ");
+                    String inputName = scanner.nextLine();
+                    System.out.print("Enter number: ");
+                    String inputNumber = scanner.nextLine();
+                    phoneNumberStored.put(inputName, inputNumber);
+                    break;
+                    //Command for the delete option
+                case "Delete":
+                    System.out.print("Enter contact name to delete: ");
+                    String contactToRemove = scanner.nextLine();
+                    if (phoneNumberStored.containsKey(contactToRemove)){
+                        phoneNumberStored.remove(contactToRemove);
+                        System.out.println(contactToRemove + " Has been deleted!");
+                    }else {
+                        System.out.println("No such contact.");
+                    }
+                    break;
+                    //Command for viewing the contact list option
+                case "View":
+                    for (Map.Entry<String, String> entry : phoneNumberStored.entrySet()) {
+                        String key = entry.getKey();
+                        String value = entry.getValue();
+                        System.out.println(key);
+                        System.out.println(value);
+                    }
+                    break;
+                default:
+                    System.out.println("Not an option");
                     break;
             }
+            System.out.println("Enter option: ");
             command = scanner.nextLine();
         }
-        for (Map.Entry<String, Integer> entry : phoneNumberStored.entrySet()) {
-            String key = entry.getKey();
-            Integer value = entry.getValue();
-            System.out.println(key);
-            System.out.println(value);
-
-        }
+        scanner.close();
     }
 }
+
