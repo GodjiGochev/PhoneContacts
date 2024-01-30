@@ -37,6 +37,16 @@ public class PhoneContacts {
                         System.out.println("No such contact.");
                     }
                     break;
+                    //Command for colling by name
+                case "Call":
+                    System.out.print("Enter name to call: ");
+                    String nameToCall = scanner.nextLine();
+                    if (phoneNumberStored.containsKey(nameToCall)){
+                        System.out.println("Calling... " + nameToCall);
+                    }else {
+                        System.out.println("Calling canceled!");
+                    }
+                    break;
                     //Command for viewing the contact list option
                 case "View":
                     for (Map.Entry<String, String> entry : phoneNumberStored.entrySet()) {
